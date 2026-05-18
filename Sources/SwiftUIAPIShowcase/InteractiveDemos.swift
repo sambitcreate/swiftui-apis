@@ -112,7 +112,7 @@ struct AnimationDemo: View {
                     .font(.headline)
                     .scaleEffect(value)
             } keyframes: { _ in
-                KeyframeTrack {
+                KeyframeTrack(\.self) {
                     CubicKeyframe(1.35, duration: 0.2)
                     SpringKeyframe(1.0, duration: 0.5)
                 }
