@@ -12,7 +12,7 @@ Open this folder in Xcode 15 or newer on macOS:
 
 1. Choose **File > Open** and select the repository folder.
 2. Select the `SwiftUIAPIShowcase` executable scheme.
-3. Run on macOS or an iOS simulator.
+3. Run with the **My Mac** destination.
 
 This container does not include `swift` or `xcodebuild`, so local compilation could not be performed here.
 
@@ -23,4 +23,3 @@ The app is intentionally data-driven. `APICatalog.swift` lists every showcased A
 ## Research Sources
 
 Primary source: Apple Developer Documentation DocC JSON for SwiftUI, especially the SwiftUI framework overview, `View` protocol, category collection pages, and SwiftUI updates pages.
-
