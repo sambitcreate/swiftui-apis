@@ -5,4 +5,4 @@ DerivedData/
 *.xcuserdata/
 Package.resolved
 .api-cache/
-
+__pycache__/
