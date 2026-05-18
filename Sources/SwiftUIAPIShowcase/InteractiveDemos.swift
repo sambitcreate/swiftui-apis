@@ -106,6 +106,17 @@ struct AnimationDemo: View {
             } animation: { _ in
                 .easeInOut(duration: 0.8)
             }
+
+            KeyframeAnimator(initialValue: 1.0, trigger: expanded) { value in
+                Text("KeyframeAnimator")
+                    .font(.headline)
+                    .scaleEffect(value)
+            } keyframes: { _ in
+                KeyframeTrack {
+                    CubicKeyframe(1.35, duration: 0.2)
+                    SpringKeyframe(1.0, duration: 0.5)
+                }
+            }
         }
     }
 }
@@ -318,4 +329,3 @@ struct CustomLayoutDemo: View {
         Button("Tertiary") { }
     }
 }
-

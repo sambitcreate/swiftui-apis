@@ -95,6 +95,7 @@ struct ControlsDemo: View {
     @State private var volume = 0.45
     @State private var count = 2
     @State private var taps = 0
+    @State private var pasted = "Paste text to update this label."
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -115,6 +116,12 @@ struct ControlsDemo: View {
             }
             Stepper("Count: \(count)", value: $count, in: 0...10)
             ShareLink(item: "SwiftUI API Showcase")
+            PasteButton(payloadType: String.self) { values in
+                pasted = values.first ?? pasted
+            }
+            Text(pasted)
+                .font(.caption)
+                .foregroundStyle(.secondary)
         }
         .disabled(!enabled)
     }
@@ -151,11 +158,14 @@ struct PickersDemo: View {
 
 struct DatesColorsDemo: View {
     @State private var date = Date.now
+    @State private var dates: Set<DateComponents> = []
     @State private var color = Color.indigo
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             DatePicker("Date", selection: $date, displayedComponents: [.date, .hourAndMinute])
+            MultiDatePicker("Multiple dates", selection: $dates)
+                .frame(minHeight: 260)
             ColorPicker("Color", selection: $color)
             RoundedRectangle(cornerRadius: 8)
                 .fill(color.gradient)
@@ -229,4 +239,3 @@ struct FormGroupingDemo: View {
         .frame(minHeight: 260)
     }
 }
-
