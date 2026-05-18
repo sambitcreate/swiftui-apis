@@ -72,7 +72,7 @@ enum APICatalog {
         APIEntry("LinearGradient", category: .drawing, summary: "Linear gradient style.", demo: .gradientsCanvas),
         APIEntry("RadialGradient", category: .drawing, summary: "Radial gradient style.", demo: .gradientsCanvas),
         APIEntry("AngularGradient", category: .drawing, summary: "Angular gradient style.", demo: .gradientsCanvas),
-        APIEntry("MeshGradient", category: .drawing, summary: "Mesh gradient style on supported systems.", demo: .gradientsCanvas),
+        APIEntry("MeshGradient", category: .drawing, summary: "Mesh gradient style on supported systems."),
         APIEntry("Canvas", category: .drawing, summary: "Immediate-mode drawing surface.", demo: .gradientsCanvas),
         APIEntry("TimelineView", category: .drawing, summary: "Updates content on a schedule.", demo: .gradientsCanvas),
         APIEntry("foregroundStyle", category: .views, summary: "Sets foreground shape styles.", demo: .modifiers),

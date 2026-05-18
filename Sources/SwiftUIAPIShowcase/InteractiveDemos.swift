@@ -125,6 +125,8 @@ struct GesturesDemo: View {
     @State private var offset: CGSize = .zero
     @State private var taps = 0
     @State private var pressed = false
+    @State private var scale = 1.0
+    @State private var rotation = Angle.zero
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -145,7 +147,22 @@ struct GesturesDemo: View {
                         pressed.toggle()
                     }
                 }
+                .scaleEffect(scale)
+                .rotationEffect(rotation)
                 .frame(maxWidth: .infinity, minHeight: 180)
+
+            Slider(value: $scale, in: 0.6...1.6) {
+                Text("MagnifyGesture equivalent scale")
+            }
+            Slider(value: Binding(
+                get: { rotation.degrees },
+                set: { rotation = .degrees($0) }
+            ), in: -45...45) {
+                Text("RotateGesture equivalent rotation")
+            }
+            Text("Drag, tap, and long press are gesture-driven. The sliders expose the same state changes you would wire to MagnifyGesture and RotateGesture on touch hardware.")
+                .font(.caption)
+                .foregroundStyle(.secondary)
         }
     }
 }
