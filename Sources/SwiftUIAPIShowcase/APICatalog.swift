@@ -1,7 +1,7 @@
 import Foundation
 
 enum APICatalog {
-    static let entries: [APIEntry] = liveEntries + referenceEntries
+    static let entries: [APIEntry] = liveEntries + referenceEntries + generatedReferenceEntries
 
     static let liveEntries: [APIEntry] = [
         APIEntry("Text", category: .views, summary: "Displays styled, formatted, selectable text.", demo: .text, code: "Text(\"SwiftUI\").font(.title).bold()"),
@@ -222,4 +222,52 @@ enum APICatalog {
         APIEntry("accessibilityRotor", category: .accessibility, summary: "Defines custom rotor navigation."),
         APIEntry("accessibilityRepresentation", category: .accessibility, summary: "Provides an alternate accessibility tree.")
     ]
+
+    static let generatedReferenceEntries: [APIEntry] = {
+        guard let url = Bundle.module.url(forResource: "swiftui-api-index", withExtension: "json"),
+              let data = try? Data(contentsOf: url),
+              let symbols = try? JSONDecoder().decode([GeneratedSymbol].self, from: data)
+        else {
+            return []
+        }
+
+        let curatedNames = Set((liveEntries + referenceEntries).map(\.name))
+        return symbols.compactMap { symbol in
+            guard !curatedNames.contains(symbol.name) else { return nil }
+            return APIEntry(
+                symbol.name,
+                category: category(from: symbol.category),
+                summary: symbol.abstract.isEmpty ? "Generated SwiftUI documentation index entry." : symbol.abstract,
+                availability: "Generated from Apple Developer Documentation DocC JSON.",
+                code: symbol.declaration
+            )
+        }
+    }()
+
+    private static func category(from generatedCategory: String) -> APICategory {
+        switch generatedCategory {
+        case "Accessibility": .accessibility
+        case "Navigation": .navigation
+        case "Presentation", "Toolbars": .presentation
+        case "Search": .search
+        case "Gestures": .gestures
+        case "Animations": .animation
+        case "Layout", "Scroll views": .layout
+        case "Lists", "Tables": .lists
+        case "Shapes", "Drawing and graphics", "Images": .drawing
+        case "Controls and indicators", "Text input and output": .controls
+        case "Environment values", "Preferences", "Persistent storage": .data
+        case "App structure": .appStructure
+        case "Framework integration": .integration
+        case "Platform specific": .platform
+        default: .essentials
+        }
+    }
+}
+
+private struct GeneratedSymbol: Decodable {
+    let name: String
+    let category: String
+    let abstract: String
+    let declaration: String
 }

@@ -14,7 +14,10 @@ let package = Package(
     targets: [
         .executableTarget(
             name: "SwiftUIAPIShowcase",
-            path: "Sources/SwiftUIAPIShowcase"
+            path: "Sources/SwiftUIAPIShowcase",
+            resources: [
+                .process("Resources")
+            ]
         )
     ]
 )
