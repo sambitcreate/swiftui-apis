@@ -9,6 +9,7 @@ enum APICategory: String, CaseIterable, Identifiable {
     case layout = "Layout"
     case navigation = "Navigation"
     case presentation = "Presentation"
+    case search = "Search"
     case lists = "Lists and Tables"
     case drawing = "Drawing"
     case animation = "Animation"
@@ -30,6 +31,7 @@ enum APICategory: String, CaseIterable, Identifiable {
         case .layout: "square.grid.3x3"
         case .navigation: "point.topleft.down.curvedto.point.bottomright.up"
         case .presentation: "rectangle.on.rectangle"
+        case .search: "magnifyingglass"
         case .lists: "list.bullet.rectangle"
         case .drawing: "paintpalette"
         case .animation: "circle.dashed"
@@ -99,4 +101,3 @@ struct APIEntry: Identifiable, Hashable {
         self.code = code
     }
 }
-
